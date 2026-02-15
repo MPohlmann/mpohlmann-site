@@ -228,6 +228,7 @@
       top: 20px;
       left: -20px;
       transform: rotate(-6deg);
+      z-index: 1;
     }
     .hero-float-2 {
       width: 280px;
@@ -235,6 +236,7 @@
       top: 80px;
       right: -30px;
       transform: rotate(4deg);
+      z-index: 1;
     }
     .hero-float-3 {
       width: 240px;
@@ -427,6 +429,12 @@
       transform: translateY(-4px);
       box-shadow: 0 12px 36px rgba(0,0,0,0.06);
       border-color: rgba(26,79,255,0.15);
+    }
+
+    /* ── PARALLAX IMAGES ── */
+    .parallax-img {
+      will-change: transform;
+      transition: transform 0.1s linear;
     }
 
     /* ── SOLUTIONS INTRO ── */
@@ -860,31 +868,28 @@
 
     .hero-float {
       opacity: 0;
-      animation: floatIn 1s ease-out forwards;
     }
-    @keyframes floatIn {
-      from { opacity: 0; transform: translateY(40px) rotate(0deg) scale(0.9); }
-      to { opacity: 1; }
-    }
-    .hero-float-1 { animation-delay: 0.3s; animation-fill-mode: forwards; }
-    .hero-float-2 { animation-delay: 0.5s; animation-fill-mode: forwards; }
-    .hero-float-3 { animation-delay: 0.7s; animation-fill-mode: forwards; }
+    .hero-float-1 { animation: floatIn1 1s ease-out 0.3s forwards; }
+    .hero-float-2 { animation: floatIn2 1s ease-out 0.5s forwards; }
+    .hero-float-3 { animation: floatIn3 1s ease-out 0.7s forwards; }
 
     @keyframes floatIn1 {
-      from { opacity: 0; transform: translateY(40px) rotate(-6deg) scale(0.9); }
-      to { opacity: 1; transform: rotate(-6deg); }
+      from { opacity: 0; transform: translateY(60px) rotate(-6deg) scale(0.85); }
+      to { opacity: 1; transform: rotate(-6deg) scale(1); }
     }
     @keyframes floatIn2 {
-      from { opacity: 0; transform: translateY(40px) rotate(4deg) scale(0.9); }
-      to { opacity: 1; transform: rotate(4deg); }
+      from { opacity: 0; transform: translateY(60px) rotate(4deg) scale(0.85); }
+      to { opacity: 1; transform: rotate(4deg) scale(1); }
     }
     @keyframes floatIn3 {
-      from { opacity: 0; transform: translateX(-50%) translateY(40px) rotate(-3deg) scale(0.9); }
-      to { opacity: 1; transform: translateX(-50%) rotate(-3deg); }
+      from { opacity: 0; transform: translateX(-50%) translateY(60px) rotate(-3deg) scale(0.85); }
+      to { opacity: 1; transform: translateX(-50%) rotate(-3deg) scale(1); }
     }
-    .hero-float-1 { animation-name: floatIn1; }
-    .hero-float-2 { animation-name: floatIn2; }
-    .hero-float-3 { animation-name: floatIn3; }
+    /* After animation ends, JS takes over transforms */
+    .hero-float.parallax-ready {
+      animation: none;
+      opacity: 1;
+    }
 
     .hero-cta-wrap {
       opacity: 0;
@@ -961,13 +966,13 @@
   <section class="hero" id="home">
     <div class="hero-inner">
       <!-- Floating images -->
-      <div class="hero-float hero-float-1" data-parallax-speed="0.15" data-parallax-rotate="4">
+      <div class="hero-float hero-float-1" data-parallax-speed="0.9" data-parallax-rotate="8">
         <img src="img/Maximilian_Pohlmann_Hamburg_Portrait_04.jpg" alt="Maximilian Pohlmann Portrait" loading="eager">
       </div>
-      <div class="hero-float hero-float-2" data-parallax-speed="0.1" data-parallax-rotate="-3">
+      <div class="hero-float hero-float-2" data-parallax-speed="0.5" data-parallax-rotate="-5">
         <img src="img/Maximilian_Pohlmann_Hamburg_Team_Building.jpg" alt="Maximilian Pohlmann" loading="eager">
       </div>
-      <div class="hero-float hero-float-3" data-parallax-speed="0.2" data-parallax-rotate="2">
+      <div class="hero-float hero-float-3" data-parallax-speed="0.25" data-parallax-rotate="6">
         <img src="img/Maximilian_Pohlmann_Hamburg_Event_Portrait.jpg" alt="Maximilian Pohlmann Speaking" loading="eager">
       </div>
 
@@ -1028,13 +1033,13 @@
     <!-- Images -->
     <div class="reveal" style="display:flex;gap:32px;justify-content:center;align-items:center;flex-wrap:wrap;margin-bottom:50px;">
       <a href="https://www.reittherapie-norderstedt.de/" target="_blank" rel="noopener" style="transition:transform 0.4s ease;">
-        <img src="img/Kinderkurse-ponys-pferde-hamburg-norderstedt.png" alt="Kinderkurse mit Ponys" style="width:260px;height:auto;display:block;transition:transform 0.4s ease;">
+        <img src="img/Kinderkurse-ponys-pferde-hamburg-norderstedt.png" alt="Kinderkurse mit Ponys" class="parallax-img" style="width:260px;height:auto;display:block;">
       </a>
-      <a href="https://www.reittherapie-norderstedt.de/" target="_blank" rel="noopener" style="transition:transform 0.4s ease;">
-        <img src="img/Reitkurs-in-norderstedt.png" alt="Reitkurs in Norderstedt" style="width:300px;height:auto;display:block;transition:transform 0.4s ease;">
+      <a href="https://www.reittherapie-norderstedt.de/" target="_blank" rel="noopener">
+        <img src="img/Reitkurs-in-norderstedt.png" alt="Reitkurs in Norderstedt" class="parallax-img" style="width:300px;height:auto;display:block;">
       </a>
-      <a href="https://www.reittherapie-norderstedt.de/" target="_blank" rel="noopener" style="transition:transform 0.4s ease;">
-        <img src="img/Ponyreiten-Kurs-Norderstedt-Hamburg.png" alt="Ponyreiten Kurs Norderstedt" style="width:240px;height:auto;display:block;transition:transform 0.4s ease;">
+      <a href="https://www.reittherapie-norderstedt.de/" target="_blank" rel="noopener">
+        <img src="img/Ponyreiten-Kurs-Norderstedt-Hamburg.png" alt="Ponyreiten Kurs Norderstedt" class="parallax-img" style="width:240px;height:auto;display:block;">
       </a>
     </div>
 
@@ -1085,10 +1090,10 @@
     <div class="solutions-right reveal">
       <div style="display:grid;grid-template-columns:1fr 0.55fr;gap:16px;align-items:stretch;">
         <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.1);">
-          <img src="img/Airbnb_Hamburg_Desktop.jpg" alt="Airbnb Holzhaus Hamburg — Desktop Ansicht" style="width:100%;height:100%;object-fit:cover;display:block;">
+          <img src="img/Airbnb_Hamburg_Desktop.jpg" alt="Airbnb Holzhaus Hamburg — Desktop Ansicht" class="parallax-img" style="width:100%;height:100%;object-fit:cover;display:block;">
         </div>
         <div style="border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.1);">
-          <img src="img/Airbnb_Hamburg_Mobile.jpg" alt="Airbnb Holzhaus Hamburg — Mobile Ansicht" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
+          <img src="img/Airbnb_Hamburg_Mobile.jpg" alt="Airbnb Holzhaus Hamburg — Mobile Ansicht" class="parallax-img" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;">
         </div>
       </div>
     </div>
@@ -1117,7 +1122,7 @@
       <div class="founder-name">Kevin de Randamie</div>
     </div>
     <div class="founder-img reveal">
-      <img src="img/Maximilian_Pohlmann_Hamburg_Museum.jpg" alt="Maximilian Pohlmann">
+      <img src="img/Maximilian_Pohlmann_Hamburg_Museum.jpg" alt="Maximilian Pohlmann" class="parallax-img">
     </div>
   </section>
 
@@ -1341,31 +1346,69 @@
     }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    // Parallax floating images
+    // ── HERO FLOAT PARALLAX ──
     const floats = document.querySelectorAll('.hero-float');
     const baseTransforms = [
-      { rotate: -6, tx: 0, ty: 0 },  // float-1
-      { rotate: 4, tx: 0, ty: 0 },   // float-2
-      { rotate: -3, tx: -50, ty: 0 }  // float-3 (has translateX(-50%))
+      { rotate: -6, tx: 0 },
+      { rotate: 4, tx: 0 },
+      { rotate: -3, tx: -50 }
     ];
+
+    // After entrance animations finish, hand control to JS
+    floats.forEach(el => {
+      el.addEventListener('animationend', () => {
+        el.classList.add('parallax-ready');
+      });
+    });
+
+    // ── UNIVERSAL IMAGE PARALLAX ──
+    // Collect all parallax images with their initial state
+    const parallaxImages = [];
+    document.querySelectorAll('.parallax-img').forEach((img, i) => {
+      parallaxImages.push({
+        el: img,
+        speed: 0.08 + (i % 4) * 0.03,
+        rotateAmount: 3 + (i % 3) * 1.5,       // 3 to 6 deg
+        scaleAmount: 0.06 + (i % 3) * 0.02,    // 6% to 10% zoom
+        direction: i % 2 === 0 ? 1 : -1         // alternating up/down
+      });
+    });
 
     let ticking = false;
     window.addEventListener('scroll', () => {
       if (!ticking) {
         requestAnimationFrame(() => {
           const scrollY = window.scrollY;
+          const viewH = window.innerHeight;
+
+          // Hero floats — only when animation is done
           floats.forEach((el, i) => {
-            const speed = parseFloat(el.dataset.parallaxSpeed) || 0.1;
+            if (!el.classList.contains('parallax-ready')) return;
+            const speed = parseFloat(el.dataset.parallaxSpeed) || 0.5;
             const rotateAdd = parseFloat(el.dataset.parallaxRotate) || 0;
             const base = baseTransforms[i];
-
             const moveY = -(scrollY * speed);
-            const addedRotate = (scrollY / 600) * rotateAdd;
-            const addedScale = 1 + Math.min(scrollY / 3000, 0.12);
-
-            let tx = base.tx ? `translateX(${base.tx}%)` : '';
+            const addedRotate = (scrollY / 300) * rotateAdd;
+            const addedScale = 1 + Math.min(scrollY / 1000, 0.25);
+            const tx = base.tx ? `translateX(${base.tx}%)` : '';
             el.style.transform = `${tx} translateY(${moveY}px) rotate(${base.rotate + addedRotate}deg) scale(${addedScale})`;
           });
+
+          // All other images — strong visible parallax
+          parallaxImages.forEach(item => {
+            const rect = item.el.getBoundingClientRect();
+            if (rect.top < viewH + 300 && rect.bottom > -300) {
+              const center = rect.top + rect.height / 2;
+              const normalized = (center / viewH - 0.5) * 2; // -1 (top) to 1 (bottom)
+
+              const moveY = normalized * 60 * item.direction;
+              const rotate = normalized * item.rotateAmount * item.direction;
+              const scale = 1 + (1 - Math.abs(normalized)) * item.scaleAmount;
+
+              item.el.style.transform = `translateY(${moveY}px) rotate(${rotate}deg) scale(${scale})`;
+            }
+          });
+
           ticking = false;
         });
         ticking = true;
